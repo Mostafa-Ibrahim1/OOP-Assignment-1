@@ -1,6 +1,6 @@
 # OOP Assignment
 
-OOP First Assignment SCS213 Course- FCAI CU
+OOP Assignment 1 SCS213 Course- FCAI CU
 
 ## MyPhoneBook Class
 ### Functions to be implemented:
