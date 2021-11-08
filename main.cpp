@@ -79,6 +79,8 @@ bool MyPhoneBook::addEntry(string name ,string phone){
     }
 if(entryAddedSuccessfully==true && isPhoneNumberValid==true){
     return true;
+}else{
+    return false;
 }
 }
 
