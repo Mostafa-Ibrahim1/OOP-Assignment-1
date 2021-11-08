@@ -34,7 +34,7 @@ OOP Assignment 1 SCS213 Course- FCAI CU
 
 ---
 
-- [ ] Member function (private): displayEntryAtIndices(int*)
+- [ ] Member function (public): displayEntryAtIndices(int*)
 - Takes an array of zeroes and ones ( has the same size as class arrays (name and phone number))
 - The entry where there is a one (in its index position) in the array will be displayed
 
