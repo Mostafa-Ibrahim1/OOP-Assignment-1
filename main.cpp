@@ -85,7 +85,17 @@ if(entryAddedSuccessfully==true && isPhoneNumberValid==true){
 }
 }
 
-
+// displayEntryAtIndex
+bool MyPhoneBook::displayEntryAtIndex(int index){
+    if(index>(phoneBookSize-1) || index<0){
+        return false;
+    }
+    else{
+        cout<<"Name : "<<names[index]<<endl;
+        cout<<"Phone number : "<<phones[index]<<endl;
+        return true;
+    }
+}
 
 
 int main(){
@@ -98,15 +108,21 @@ int main(){
     cout<<"Entry 2: "<<result2<<endl;
     bool result3=pb1.addEntry("Mostafa","123456708901");//not 11 but valid and empty space available == false
     cout<<"Entry 3: "<<result3<<endl;
-    bool result4=pb1.addEntry("Mostafa","12345778901");//11 valid and empty space available == true
+    bool result4=pb1.addEntry("Mostafa","12344678900");//11 valid and empty space available == true
     cout<<"Entry 4: "<<result4<<endl;
-    bool result5=pb1.addEntry("Mostafa","223456708901");//11 valid and empty space NOT available == false
+    bool result5=pb1.addEntry("Mostafa","01010101010");//11 valid and empty space NOT available == false
     cout<<"Entry 5: "<<result5<<endl;
-
+    
     // Entry 1: 1
     // Entry 2: 0
     // Entry 3: 0
     // Entry 4: 1
     // Entry 5: 0
+
+    //testing displayEntryAtIndex
+    //If index is out of range will return false and won't display an entry
+    //If index is in range then it will return true and will display the entry of that index
+    bool res=pb1.displayEntryAtIndex(1);
+    cout<<res<<endl;
     return 0;
 }
