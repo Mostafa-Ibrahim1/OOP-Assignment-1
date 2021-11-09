@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <iomanip> // Needed for formatting output
 using namespace std;
 
 class MyPhoneBook
@@ -21,7 +22,11 @@ class MyPhoneBook
  bool updatePhoneAt(string, int);
 //  ~MyPhoneBook();
 };
+
+
 //Constructors
+
+//Parametarized constructor 
 MyPhoneBook::MyPhoneBook(int phoneBookSize){
     this->phoneBookSize=phoneBookSize;
     names=new string[phoneBookSize];
@@ -32,6 +37,7 @@ MyPhoneBook::MyPhoneBook(int phoneBookSize){
         }
 }
 
+//Copy constructor
 MyPhoneBook::MyPhoneBook(const MyPhoneBook &phoneBook){
     phoneBookSize=phoneBook.phoneBookSize;
     names=new string[phoneBookSize];
@@ -42,7 +48,7 @@ MyPhoneBook::MyPhoneBook(const MyPhoneBook &phoneBook){
     }
 }
 
-//Add Entry
+//Add Entry function
 
 bool MyPhoneBook::addEntry(string name ,string phone){
     bool entryAddedSuccessfully;
@@ -78,11 +84,32 @@ bool MyPhoneBook::addEntry(string name ,string phone){
             continue;    
         }
     }
-if(entryAddedSuccessfully==true && isPhoneNumberValid==true){
-    return true;
-}else{
-    return false;
+    if(entryAddedSuccessfully==true && isPhoneNumberValid==true){
+        return true;
+    }else{
+        return false;
+    }
 }
+
+// Function to display all entries.
+void MyPhoneBook::displayAll()
+{
+    for (int i = 0; i < phoneBookSize; i++)
+    {
+        // If conditon to skip blank entries
+        if(names[i] == " " && phones[i] == " ")
+        {
+            continue;
+        }
+        else 
+        {
+            cout << setw(20) << left << names[i];
+            cout << setw(10) << phones[i];
+            cout << endl;
+        }
+        
+    }
+    
 }
 
 
@@ -92,7 +119,7 @@ int main(){
     //Used for testing functionality
 
     MyPhoneBook pb1(2);
-    bool result1=pb1.addEntry("Mostafa","12345678901");//11 valid and empty space available == true
+    bool result1=pb1.addEntry("Mostafa Ibrahim","12345678901");//11 valid and empty space available == true
     cout<<"Entry 1: "<<result1<<endl;
     bool result2=pb1.addEntry("Mostafa","12345)78#01");//11 not valid and empty space available == false
     cout<<"Entry 2: "<<result2<<endl;
@@ -108,5 +135,7 @@ int main(){
     // Entry 3: 0
     // Entry 4: 1
     // Entry 5: 0
+
+    pb1.displayAll();
     return 0;
 }
