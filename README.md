@@ -4,19 +4,19 @@ OOP Assignment 1 SCS213 Course- FCAI CU
 
 ## MyPhoneBook Class
 ### Member Variables:
-- [ ] names (private): Dynamic array of strings
-- [ ] phones (private): Dynamic array of strings
-- [ ] phoneBookSize (private): integer
+- [x] names (private): Dynamic array of strings
+- [x] phones (private): Dynamic array of strings
+- [x] phoneBookSize (private): integer
 ### Functions to be implemented:
 #### Constructors:
 
-- [ ] Parameterized One that takes the size of PhoneBook and allocate dynamic arrays of names and phones    MyPhoneBook(int)
-- [ ] Copy constructor to initialize a PhoneBook using another PhoneBook    MyPhoneBook(const MyPhoneBook&)
+- [x] Parameterized One that takes the size of PhoneBook and allocate dynamic arrays of names and phones    MyPhoneBook(int)
+- [x] Copy constructor to initialize a PhoneBook using another PhoneBook    MyPhoneBook(const MyPhoneBook&)
 
 
 ---
 
-- [ ] Member function (public): addEntry(string,string)
+- [x] Member function (public): addEntry(string,string)
 - Add name and phone number at the first empty space
 - An entry is added if there's space in the array and if the phone number is valid (11 digits and doesn't include alphabet or special characters)
 - return true if entry is added, false otherwise
@@ -28,7 +28,7 @@ OOP Assignment 1 SCS213 Course- FCAI CU
 
 ---
 
-- [ ] Member function (public): displayEntryAtIndex(int)
+- [x] Member function (public): displayEntryAtIndex(int)
 - Displays name and phone number at a specific index
 - returns true if index is in range, false otherwise
 
@@ -40,7 +40,7 @@ OOP Assignment 1 SCS213 Course- FCAI CU
 
 ---
 
-- [ ] Member function (public): findByName(string)
+- [x] Member function (public): findByName(string)
 - Search in the PhoneBook by either
   - Full name
   - Part of a name
@@ -48,7 +48,7 @@ OOP Assignment 1 SCS213 Course- FCAI CU
 
 ---
 
-- [ ] Member function (public): findByPhone(string)
+- [x] Member function (public): findByPhone(string)
 - Search in the PhoneBook by either
   - Full phone number
   - Part of a phone number
