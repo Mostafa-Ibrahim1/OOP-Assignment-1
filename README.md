@@ -23,7 +23,7 @@ OOP Assignment 1 SCS213 Course- FCAI CU
 
 ---
 
-- [ ] Member function (public): displayAll()
+- [x] Member function (public): displayAll()
 - Displays all entries in the phone book
 
 ---
@@ -56,7 +56,7 @@ OOP Assignment 1 SCS213 Course- FCAI CU
 
 ---
 
-- [ ] Member function (public): updateNameAt(string,int)
+- [x] Member function (public): updateNameAt(string,int)
 - Update name in PhoneBook using the index of it
 - Returns bool, true if the parameter index
   - is within range
@@ -64,7 +64,7 @@ OOP Assignment 1 SCS213 Course- FCAI CU
 
 ---
 
-- [ ] Member function (public): updatePhoneAt(string,int)
+- [x] Member function (public): updatePhoneAt(string,int)
 - Update phone number in PhoneBook using the index of it
 - Returns bool, true if the parameter index
   - is within range
