@@ -81,11 +81,13 @@ bool MyPhoneBook::addEntry(string name ,string phone){
             continue;    
         }
     }
-if(entryAddedSuccessfully==true && isPhoneNumberValid==true){
-    return true;
-}else{
-    return false;
-}
+    if(entryAddedSuccessfully==true && isPhoneNumberValid==true){
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
 // displayEntryAtIndex
@@ -134,6 +136,7 @@ int * MyPhoneBook::findByPhone(string phone){
 
 // Function to display all entries.
 void MyPhoneBook::displayAll()
+
 {
     for (int i = 0; i < phoneBookSize; i++)
     {
@@ -153,6 +156,64 @@ void MyPhoneBook::displayAll()
     
 }
 
+// Update name at index.
+bool MyPhoneBook::updateNameAt(string name, int index)
+{
+    bool indexIsValid = false;
+
+    if (index < phoneBookSize && index >= 0)
+    {
+        indexIsValid = true;
+    }
+    
+    if (indexIsValid)
+    {
+        names[index] = name;
+        return true; 
+    }
+    else 
+    {
+        return false;
+    }
+
+}
+
+// Update phone at index.
+bool MyPhoneBook::updatePhoneAt(string phone, int index)
+{
+    string allowedPhoneNumberCharacters="0123456789";
+    bool isPhoneNumberValid;
+
+    if(phone.length()==11){
+        for(int i=0;i<phone.length();i++){
+            if(allowedPhoneNumberCharacters.find(phone[i])!=string::npos){
+                isPhoneNumberValid=true;
+            }else{
+                isPhoneNumberValid=false;
+                break;
+            }
+    }
+    }else{
+        isPhoneNumberValid=false;
+    }
+
+    // This is one of the conditions that leads to entry insertion failure (Phone number being not valid)
+    if(isPhoneNumberValid==false){
+        return false;
+    }
+
+    if (isPhoneNumberValid)
+    {
+        phones [index] = phone;
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+    
+
+}
 
 int main(){
     //Used for testing functionality
@@ -189,5 +250,15 @@ int main(){
     int *resArray2=pb1.findByPhone("010");
     cout<<resArray2[0]<<endl;
     cout<<resArray2[1]<<endl;
+
+    // to test updateNameAt
+    bool test = pb1.updateNameAt("Youssef",0);
+    pb1.displayEntryAtIndex(0);
+    cout << test << endl; // 1
+
+    //to test updatePhoneAt
+    bool test2 = pb1.updatePhoneAt("12345678900",0);
+    pb1.displayEntryAtIndex(0);
+    cout << test2 << endl; //1
     return 0;
 }
