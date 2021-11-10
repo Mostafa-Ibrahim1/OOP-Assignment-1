@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <iomanip>
 using namespace std;
 
 class MyPhoneBook
@@ -21,6 +22,8 @@ class MyPhoneBook
  bool updatePhoneAt(string, int);
 //  ~MyPhoneBook();
 };
+
+
 //Constructors
 MyPhoneBook::MyPhoneBook(int phoneBookSize){
     this->phoneBookSize=phoneBookSize;
@@ -127,6 +130,27 @@ int * MyPhoneBook::findByPhone(string phone){
     }
     return findPhoneArray;
 
+}
+
+// Function to display all entries.
+void MyPhoneBook::displayAll()
+{
+    for (int i = 0; i < phoneBookSize; i++)
+    {
+        // If conditon to skip blank entries
+        if(names[i] == " " && phones[i] == " ")
+        {
+            continue;
+        }
+        else 
+        {
+            cout << setw(20) << left << names[i];
+            cout << setw(10) << phones[i];
+            cout << endl;
+        }
+        
+    }
+    
 }
 
 
