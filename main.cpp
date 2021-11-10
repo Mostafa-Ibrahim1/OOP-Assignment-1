@@ -138,6 +138,7 @@ int * MyPhoneBook::findByPhone(string phone){
 void MyPhoneBook::displayAll()
 
 {
+    
     for (int i = 0; i < phoneBookSize; i++)
     {
         // If conditon to skip blank entries
@@ -220,15 +221,15 @@ int main(){
 
     MyPhoneBook pb1(2);
     bool result1=pb1.addEntry("Mostafa Ibrahim","01045678901");//11 valid and empty space available == true
-    cout<<"Entry 1: "<<result1<<endl;
+    
     bool result2=pb1.addEntry("Mostafa","12345)78#01");//11 not valid and empty space available == false
-    cout<<"Entry 2: "<<result2<<endl;
+    
     bool result3=pb1.addEntry("Mostafa","123456708901");//not 11 but valid and empty space available == false
-    cout<<"Entry 3: "<<result3<<endl;
-    bool result4=pb1.addEntry("M.Ibrahim Abdellatif","01134578900");//11 valid and empty space available == true
-    cout<<"Entry 4: "<<result4<<endl;
+    
+    bool result4=pb1.addEntry("Mostafa Ibrahim","01134578900");//11 valid and empty space available == true
+    
     bool result5=pb1.addEntry("Mostafa","01010101010");//11 valid and empty space NOT available == false
-    cout<<"Entry 5: "<<result5<<endl;
+    
     
     // Entry 1: 1
     // Entry 2: 0
@@ -240,25 +241,78 @@ int main(){
     //If index is out of range will return false and won't display an entry
     //If index is in range then it will return true and will display the entry of that index
     bool res=pb1.displayEntryAtIndex(1);
-    cout<<"display Entry :"<<res<<endl;
+    cout<<" "<<endl;
 
     //testing findBy
     int *resArray=pb1.findByName("M");
-    cout<<resArray[0]<<endl;
-    cout<<resArray[1]<<endl;
-    cout<<"Phone :"<<endl;
     int *resArray2=pb1.findByPhone("010");
-    cout<<resArray2[0]<<endl;
-    cout<<resArray2[1]<<endl;
 
     // to test updateNameAt
     bool test = pb1.updateNameAt("Youssef",0);
     pb1.displayEntryAtIndex(0);
-    cout << test << endl; // 1
 
     //to test updatePhoneAt
     bool test2 = pb1.updatePhoneAt("12345678900",0);
     pb1.displayEntryAtIndex(0);
-    cout << test2 << endl; //1
+
+    cout<<"----"<<endl;
+    pb1.displayAll();
+    
+    //--------------------------
+    cout<<""<<endl;
+    cout<<"Program start!"<<endl;
+    cout<<""<<endl;
+    int sizeOfPhoneBook;
+    cout<<"Enter the size of your Phone Book: ";
+    cin>>sizeOfPhoneBook;
+    MyPhoneBook userPhoneBook(sizeOfPhoneBook);
+    for(int i=0;i<sizeOfPhoneBook;i++){
+        string name;
+        string phone;
+        cout<<"Enter name "<<to_string(i+1)<<": ";
+        cin>>name;
+        cout<<"Enter phone "<<to_string(i+1)<<": ";
+        cin>>phone;
+        userPhoneBook.addEntry(name,phone);
+    }
+    cout<<""<<endl;
+
+    bool programIsRunning=true;
+
+    while(programIsRunning){
+        string userChoice;
+        cout<<""<<endl;
+        cout<<""<<endl;
+        cout<<"Enter your choice: "<<endl;
+        cout<<"1- Display all phone book"<<endl;
+        cout<<"2- Search for entry/entries by name"<<endl;
+        cout<<"3- Search for entry/entries by phone"<<endl;
+        cout<<"4- Find an entry by index"<<endl;
+        cout<<"5- Update name by index"<<endl;
+        cout<<"6- Update phone by index"<<endl;
+        cout<<"7- Copy phone book to another and display entries of the new phone book"<<endl;
+        cout<<"8- Exit"<<endl;
+        cout<<"Choice: ";
+        cin>>userChoice;
+        cout<<""<<endl;
+        if(userChoice=="1"){cout<<"Display all phone book"<<endl;}
+        else if(userChoice=="2"){cout<<"Search by name"<<endl;}
+        else if(userChoice=="3"){cout<<"Search by phone"<<endl;}
+        else if(userChoice=="4"){cout<<"find entry by index"<<endl;}
+        else if(userChoice=="5"){cout<<"update name by index"<<endl;}
+        else if(userChoice=="6"){cout<<"update phone by index"<<endl;}
+        else if(userChoice=="7"){cout<<"copy pb to another and display entries"<<endl;}
+        else if(userChoice=="8"){
+            programIsRunning=false;
+            cout<<"exit"<<endl;}
+        else{cout<<"Choice not available!"<<endl;}
+
+
+    }
+    
+    
     return 0;
+
+
+
 }
