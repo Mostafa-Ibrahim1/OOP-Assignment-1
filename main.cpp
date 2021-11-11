@@ -214,6 +214,37 @@ bool MyPhoneBook::updatePhoneAt(string phone, int index)
 
 }
 
+//Update phone at indices.
+void MyPhoneBook::displayEntryAtIndices(int *indicesArray)
+{
+    bool isArrayValid = true;
+    for (int i = 0; i < phoneBookSize; i++)
+    {
+        if (indicesArray[i] != 1 && indicesArray[i] != 0)
+        {
+            cout << "Array entered is not valid" << endl;
+            isArrayValid = false;
+            break;
+        }
+    }
+
+    if (isArrayValid)
+    {
+        for (int i = 0; i < phoneBookSize; i++)
+        {
+            if (indicesArray[i] == 1)
+            {
+                cout << setw(10) << names[i];
+                cout << setw(20) << phones[i];
+                cout << endl;
+            }
+        
+        }
+    }
+    
+    
+}
+
 int main(){
     //Used for testing functionality
 
@@ -227,7 +258,16 @@ int main(){
     bool result4=pb1.addEntry("Mostafa Ibrahim","01134578900");//11 valid and empty space available == true
     
     bool result5=pb1.addEntry("Mostafa","01010101010");//11 valid and empty space NOT available == false
+    /*
+    // test for displayEntryAtIndices
+    int *arr = new int [2];
+    for (int i = 0; i < 2; i++)
+    {
+        cin >> arr[i];
+    }
     
+    pb1.displayEntryAtIndices(arr);
+    */
     
     // Entry 1: 1
     // Entry 2: 0
