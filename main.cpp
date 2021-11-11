@@ -271,7 +271,7 @@ int main()
 {
     int sizeOfPhoneBook;
     bool isProgramRunning = true;
-    cout << "Enter the size of your phone: ";
+    cout << "Enter the size of your phonebook: ";
     cin >> sizeOfPhoneBook;
 
     MyPhoneBook userPhoneBook(sizeOfPhoneBook);
@@ -290,7 +290,7 @@ int main()
     do
     {
         string userChoice;
-        string allowedPhoneNumberCharacters="12345678";
+        string allowedUserChoiceCharacters="12345678";
         bool isUserChoiceValid;
 
         cout<<""<<endl;
@@ -306,29 +306,31 @@ int main()
         cout<<"8- Exit"<<endl;
         cout<<"Choice: ";
         cin>>userChoice;
+        int finalChoice;
 
         // to check user's input.
         if(userChoice.length()==1)
-        {
-            
-            if(allowedPhoneNumberCharacters.find(userChoice[0])!=string::npos)
+        {   
+            if(allowedUserChoiceCharacters.find(userChoice[0])!=string::npos)
             {
                 isUserChoiceValid=true;
+                // Converting input of user to int.
+                int finalChoice = stoi(userChoice);
             }
             else
             {
+                cout<<"Invalid Choice! Please choose from the menu!"<<endl;
                 isUserChoiceValid=false;
-                break;
             }
             
         }
         else
         {
+            cout<<"Invalid Choice! Please choose from the menu!"<<endl;
             isUserChoiceValid=false;
         }
         
-        // Converting input of user to int.
-        int finalChoice = stoi(userChoice);
+        
 
         if (isUserChoiceValid)  
         {
