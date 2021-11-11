@@ -87,6 +87,7 @@ bool MyPhoneBook::addEntry(string name ,string phone){
 
     // This is one of the conditions that leads to entry insertion failure (Phone number being not valid)
     if(isPhoneNumberValid==false){
+        cout<<"Phone number is not valid! Entry not added!"<<endl;
         return false;
     }
     //Then it will check if there is an available place in the phonebook
@@ -106,6 +107,7 @@ bool MyPhoneBook::addEntry(string name ,string phone){
     }
     else
     {
+        cout<<"Attempt to add an entry failed!"<<endl;
         return false;
     }
 }
@@ -280,11 +282,15 @@ int main()
     {
         string name;
         string phone;
+        enterAgain:
         cout<<"Enter name "<<to_string(i+1)<<": ";
         cin>>name;
         cout<<"Enter phone "<<to_string(i+1)<<": ";
         cin>>phone;
-        userPhoneBook.addEntry(name,phone);
+        bool entryAddedSuccessfully = userPhoneBook.addEntry(name,phone);
+        if(entryAddedSuccessfully==0){
+            goto enterAgain;
+        }
     }
 
     do
@@ -338,20 +344,39 @@ int main()
             switch (finalChoice)
             {
                 case 1:
-                    cout << "Display all phone book" << endl;
                     userPhoneBook.displayAll();
                     break;
 
                 case 2:
-                    cout<<"Search by name" << endl;
-                    //userPhoneBook.findByName();
+                {
+                    string nameToSearchFor;
+                    cout<<"Enter the name you want to search for: "<<endl;
+                    cin >>nameToSearchFor;
+                    int * nameSearchResultArray=userPhoneBook.findByName(nameToSearchFor);
+                    for(int i=0;i<sizeOfPhoneBook;i++){
+                        if(nameSearchResultArray[i]==1){
+                            cout<<"Entry at index "<<i<<" is a match"<<endl;
+                        }else{
+                            cout<<"Entry at index "<<i<<" is not a match"<<endl;
+                        }
+                    }
                     break;
-                
+                }
                 case 3:
-                    cout<<"Search by phone" << endl;
-                    //userPhoneBook.findByPhone();
+                {
+                    string phoneToSearchFor;
+                    cout<<"Enter the phone number you want to search for: "<<endl;
+                    cin >>phoneToSearchFor;
+                    int * phoneSearchResultArray=userPhoneBook.findByPhone(phoneToSearchFor);
+                    for(int i=0;i<sizeOfPhoneBook;i++){
+                        if(phoneSearchResultArray[i]==1){
+                            cout<<"Entry at index "<<i<<" is a match"<<endl;
+                        }else{
+                            cout<<"Entry at index "<<i<<" is not a match"<<endl;
+                        }
+                    }
                     break;
-                
+                }
                 case 4:
                     cout<<"display entry by index" << endl;
                     //userPhoneBook.displayEntryAtIndex();
