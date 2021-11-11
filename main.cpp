@@ -8,6 +8,8 @@ class MyPhoneBook
  string* names;
  string* phones;
  int phoneBookSize;
+ int * findNameArray;
+ int * findPhoneArray;
 
  public:
  MyPhoneBook(int);
@@ -20,13 +22,16 @@ class MyPhoneBook
  int* findByPhone(string);
  bool updateNameAt(string, int);
  bool updatePhoneAt(string, int);
-//  ~MyPhoneBook();
+ ~MyPhoneBook();
 };
 //Constructors
 MyPhoneBook::MyPhoneBook(int phoneBookSize){
     this->phoneBookSize=phoneBookSize;
     names=new string[phoneBookSize];
     phones=new string[phoneBookSize];
+    findNameArray=new int[phoneBookSize];
+    findPhoneArray=new int[phoneBookSize];
+
     for(int i=0;i<phoneBookSize;i++){
         names[i]=" ";
         phones[i]=" ";
@@ -37,14 +42,29 @@ MyPhoneBook::MyPhoneBook(const MyPhoneBook &phoneBook){
     phoneBookSize=phoneBook.phoneBookSize;
     names=new string[phoneBookSize];
     phones=new string[phoneBookSize];
+    findNameArray=new int[phoneBookSize];
+    findPhoneArray=new int[phoneBookSize];
+
     for(int i=0;i<phoneBookSize;i++){
         names[i]=phoneBook.names[i];
         phones[i]=phoneBook.phones[i];
     }
 }
 
-//Add Entry
+// Destructor
+MyPhoneBook::~MyPhoneBook()
+{
+    delete [] names;
+    delete [] phones;
+    delete [] findNameArray;
+    delete [] findPhoneArray;
+    names = NULL;
+    phones = NULL;
+    findNameArray = NULL;
+    findPhoneArray = NULL;    
+}
 
+// Add Entry
 bool MyPhoneBook::addEntry(string name ,string phone){
     bool entryAddedSuccessfully;
     string allowedPhoneNumberCharacters="0123456789";
@@ -105,7 +125,7 @@ bool MyPhoneBook::displayEntryAtIndex(int index){
 // findByName
 int * MyPhoneBook::findByName(string name){
     // entry.find(specific string)
-    int * findNameArray=new int[phoneBookSize];
+    //int * findNameArray=new int[phoneBookSize]; Old declaration
     for(int i=0;i<phoneBookSize;i++){
         if(names[i].rfind(name,0)!=string::npos){
             findNameArray[i]=1;
@@ -120,7 +140,7 @@ int * MyPhoneBook::findByName(string name){
 // findByPhone
 int * MyPhoneBook::findByPhone(string phone){
     // entry.find(specific string)
-    int * findPhoneArray=new int[phoneBookSize];
+    //int * findPhoneArray=new int[phoneBookSize]; Old declaration 
     for(int i=0;i<phoneBookSize;i++){
         if(phones[i].rfind(phone,0)!=string::npos){
             findPhoneArray[i]=1;
