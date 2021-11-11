@@ -290,7 +290,7 @@ int main()
     do
     {
         string userChoice;
-        string allowedUserChoiceCharacters="12345678";
+        string allowedUserChoiceCharacters="123456789";
         bool isUserChoiceValid;
 
         cout<<""<<endl;
@@ -305,6 +305,7 @@ int main()
         cout<<"7- Copy phone book to another and display entries of the new phone book"<<endl;
         cout<<"8- Exit"<<endl;
         cout<<"Choice: ";
+
         cin>>userChoice;
         int finalChoice;
 
@@ -315,7 +316,7 @@ int main()
             {
                 isUserChoiceValid=true;
                 // Converting input of user to int.
-                int finalChoice = stoi(userChoice);
+                finalChoice = stoi(userChoice);
             }
             else
             {
@@ -338,7 +339,7 @@ int main()
             {
                 case 1:
                     cout << "Display all phone book" << endl;
-                    //userPhoneBook.displayAll();
+                    userPhoneBook.displayAll();
                     break;
 
                 case 2:
@@ -356,33 +357,74 @@ int main()
                     //userPhoneBook.displayEntryAtIndex();
                     break;
                 
-                case 5:
-                    cout << "Update name by index" << endl;
-                    //userPhoneBook.updateNameAt();
-                    break;
+                case 5: // Update name by index
+                {    
+                    int index;
+                    string updatedName;
 
-                case 6:
-                    cout << "Update phone by index" << endl;
-                    //userPhoneBook.updatePhoneAt();
+                    cout << "Enter index: ";
+                    cin >> index;
+
+                    if (index < 0 || index > sizeOfPhoneBook)
+                    {
+                        cout << "Please enter a correct index.";
+                    }
+                    
+                    cout << "Enter updated name: ";
+                    cin >> updatedName;
+
+                    bool isExecutedCorrectly = userPhoneBook.updateNameAt(updatedName,index);
+                    
+                    if (!isExecutedCorrectly)
+                    {
+                        cout << "Process not executed correctly. Please try again." << endl;
+                    }
+
                     break;
-                
-                case 7:
+                }
+                // Update phone by index
+                case 6:
+                {   
+                    int index;
+                    string updatedPhone;
+
+                    cout << "Enter index: ";
+                    cin >> index;
+
+                    if (index < 0 || index > sizeOfPhoneBook)
+                    {
+                        cout << "Please enter a correct index.";
+                    }
+
+                    cout << "Enter updated phone number: ";
+                    cin >> updatedPhone;
+                    
+                    bool isExecutedCorrectly = userPhoneBook.updatePhoneAt(updatedPhone,index);
+                    
+                    if (!isExecutedCorrectly)
+                    {
+                        cout << "Process not executed correctly. Please try again." << endl;
+                    }
+                    break;
+                }
+                /*case 7:
                     cout << "copy pb to another and display entries" << endl;
-                    /* 1- create a new phone book
+                       1- create a new phone book
                        2- copy the contents of old phonebook using constructor.
                        3- display all()
-                    */
+                    
                     break;
-
-                case 8:// Not mentioned in the assignment file.
+                    */
+                /*case 8:// Not mentioned in the assignment file.
                     cout << "Display entries at indices" << endl;
                     //userPhoneBook.displayEntryAtIndices();
-                    break;
-
-                case 9:
+                    break; */
+                
+                case 8:
+                {
                     isProgramRunning = false;
-                    cout << "exit" << endl;
                     break;
+                }
                 
             }
         }
