@@ -126,8 +126,6 @@ bool MyPhoneBook::displayEntryAtIndex(int index){
 
 // findByName
 int * MyPhoneBook::findByName(string name){
-    // entry.find(specific string)
-    //int * findNameArray=new int[phoneBookSize]; Old declaration
     for(int i=0;i<phoneBookSize;i++){
         if(names[i].rfind(name,0)!=string::npos){
             findNameArray[i]=1;
@@ -140,9 +138,7 @@ int * MyPhoneBook::findByName(string name){
 }
 
 // findByPhone
-int * MyPhoneBook::findByPhone(string phone){
-    // entry.find(specific string)
-    //int * findPhoneArray=new int[phoneBookSize]; Old declaration 
+int * MyPhoneBook::findByPhone(string phone){ 
     for(int i=0;i<phoneBookSize;i++){
         if(phones[i].rfind(phone,0)!=string::npos){
             findPhoneArray[i]=1;
@@ -294,7 +290,7 @@ int main()
     do
     {
         string userChoice;
-        string allowedUserChoiceCharacters="123456789";
+        string allowedUserChoiceCharacters="12345678";
         bool isUserChoiceValid;
 
         cout<<""<<endl;
@@ -348,7 +344,7 @@ int main()
                 case 2:
                 {
                     string nameToSearchFor;
-                    cout<<"Enter the name you want to search for: "<<endl;
+                    cout<<"Enter the name(Or part of it) you want to search for: "<<endl;
                     cin >>nameToSearchFor;
                     int * nameSearchResultArray=userPhoneBook.findByName(nameToSearchFor);
                     for(int i=0;i<sizeOfPhoneBook;i++){
@@ -358,12 +354,15 @@ int main()
                             cout<<"Entry at index "<<i<<" is not a match"<<endl;
                         }
                     }
+                    
+                    delete [] nameSearchResultArray;
+                    nameSearchResultArray = NULL;
                     break;
                 }
                 case 3:
                 {
                     string phoneToSearchFor;
-                    cout<<"Enter the phone number you want to search for: "<<endl;
+                    cout<<"Enter the phone number(Or part of it) you want to search for: "<<endl;
                     cin >>phoneToSearchFor;
                     int * phoneSearchResultArray=userPhoneBook.findByPhone(phoneToSearchFor);
                     for(int i=0;i<sizeOfPhoneBook;i++){
@@ -373,13 +372,39 @@ int main()
                             cout<<"Entry at index "<<i<<" is not a match"<<endl;
                         }
                     }
+                    delete [] phoneSearchResultArray;
+                    phoneSearchResultArray = NULL;
+                    
                     break;
                 }
                 case 4:
-                    cout<<"display entry by index" << endl;
-                    //userPhoneBook.displayEntryAtIndex();
+                {
+                    string subMenuChoice;
+                    int indexOfEntry;
+                    cout<<"Please choose from this menu the operation you want:"<<endl;
+                    cout<<"A-Find just one entry by its index"<<endl;
+                    cout<<"B-Find more than one entry by their indices"<<endl;
+                    cout<<"Your Choice:"<<endl;
+                    cin>>subMenuChoice;
+                    if(subMenuChoice=="A" ||subMenuChoice=="a"){
+                        cout<<"Enter the index of the entry:"<<endl;
+                        cin>>indexOfEntry;
+                        bool resultOfDisplayAtIndex=userPhoneBook.displayEntryAtIndex(indexOfEntry);
+                        if(resultOfDisplayAtIndex==0){
+                            cout<<"Index out of range!"<<endl;
+                        }
+                    }
+                    else if(subMenuChoice=="B"||subMenuChoice=="b"){
+    
+                        // By Indices
+
+
+                    }
+                    else{
+                        cout<<"Invalid choice!"<<endl;
+                    }
                     break;
-                
+                }
                 case 5: // Update name by index
                 {    
                     int index;
@@ -430,19 +455,14 @@ int main()
                     }
                     break;
                 }
-                /*case 7:
-                    cout << "copy pb to another and display entries" << endl;
-                       1- create a new phone book
-                       2- copy the contents of old phonebook using constructor.
-                       3- display all()
-                    
+                case 7:
+                {    
+                    MyPhoneBook copyOfUserPhoneBook(userPhoneBook);
+                    cout<<"Phone book copied!"<<endl;
+                    cout<<"Here is the content of the new copy of phone book :"<<endl;
+                    copyOfUserPhoneBook.displayAll();
                     break;
-                    */
-                /*case 8:// Not mentioned in the assignment file.
-                    cout << "Display entries at indices" << endl;
-                    //userPhoneBook.displayEntryAtIndices();
-                    break; */
-                
+                }
                 case 8:
                 {
                     isProgramRunning = false;
