@@ -3,49 +3,62 @@
 #include <iomanip>
 using namespace std;
 
+// Class declaration.
 class MyPhoneBook
 {
- string* names;
- string* phones;
- int phoneBookSize;
- int * findNameArray;
- int * findPhoneArray;
+    private:
+        string* names;
+        string* phones;
+        int phoneBookSize;
+        int * findNameArray;
+        int * findPhoneArray;
 
- public:
- MyPhoneBook(int);
- MyPhoneBook(const MyPhoneBook&);
- bool addEntry(string ,string);
- bool displayEntryAtIndex(int);
- void displayEntryAtIndices(int*);
- void displayAll();
- int* findByName(string);
- int* findByPhone(string);
- bool updateNameAt(string, int);
- bool updatePhoneAt(string, int);
- ~MyPhoneBook();
+    public:
+        MyPhoneBook(int);
+        MyPhoneBook(const MyPhoneBook&);
+        bool addEntry(string ,string);
+        bool displayEntryAtIndex(int);
+        void displayEntryAtIndices(int*);
+        void displayAll();
+        int* findByName(string);
+        int* findByPhone(string);
+        bool updateNameAt(string, int);
+        bool updatePhoneAt(string, int);
+        ~MyPhoneBook();
 };
-//Constructors
-MyPhoneBook::MyPhoneBook(int phoneBookSize){
+
+
+// Parameterized constructor
+MyPhoneBook::MyPhoneBook(int phoneBookSize)
+{
     this->phoneBookSize=phoneBookSize;
+
     names=new string[phoneBookSize];
     phones=new string[phoneBookSize];
+
     findNameArray=new int[phoneBookSize];
     findPhoneArray=new int[phoneBookSize];
 
-    for(int i=0;i<phoneBookSize;i++){
+    for(int i=0;i<phoneBookSize;i++)
+    {
         names[i]=" ";
         phones[i]=" ";
-        }
+    }
 }
 
-MyPhoneBook::MyPhoneBook(const MyPhoneBook &phoneBook){
+// Copy constructor
+MyPhoneBook::MyPhoneBook(const MyPhoneBook &phoneBook)
+{
     phoneBookSize=phoneBook.phoneBookSize;
+
     names=new string[phoneBookSize];
     phones=new string[phoneBookSize];
+
     findNameArray=new int[phoneBookSize];
     findPhoneArray=new int[phoneBookSize];
 
-    for(int i=0;i<phoneBookSize;i++){
+    for(int i=0;i<phoneBookSize;i++)
+    {
         names[i]=phoneBook.names[i];
         phones[i]=phoneBook.phones[i];
     }
@@ -64,43 +77,62 @@ MyPhoneBook::~MyPhoneBook()
     findPhoneArray = NULL;    
 }
 
-// Add Entry
-bool MyPhoneBook::addEntry(string name ,string phone){
-    bool entryAddedSuccessfully;
+// addEntry function
+bool MyPhoneBook::addEntry(string name ,string phone)
+{
+    bool entryAddedSuccessfully; 
     string allowedPhoneNumberCharacters="0123456789";
     bool isPhoneNumberValid;
 
-    if(phone.length()==11){
-        for(int i=0;i<phone.length();i++){
-            if(allowedPhoneNumberCharacters.find(phone[i])!=string::npos){
+    // Checking User's input.
+    if(phone.length()==11)
+    {
+        for(int i=0;i<phone.length();i++)
+        {
+            if(allowedPhoneNumberCharacters.find(phone[i])!=string::npos) 
+            {
                 isPhoneNumberValid=true;
-            }else{
+            }
+            else
+            {
+                cout << "Phone number is not valid! Entry not added!" << endl; ;
                 isPhoneNumberValid=false;
                 break;
             }
+        }
     }
-    }else{
+    else
+    {
         isPhoneNumberValid=false;
     }
 
-    // This is one of the conditions that leads to entry insertion failure (Phone number being not valid)
-    if(isPhoneNumberValid==false){
+    // This is one of the conditions that leads to entry insertion failure (Phone number being not valid).
+    if(isPhoneNumberValid==false)
+    {
         cout<<"Phone number is not valid! Entry not added!"<<endl;
         return false;
     }
-    //Then it will check if there is an available place in the phonebook
-    for(int i=0;i<phoneBookSize;i++){
-        if(names[i]==" "&&phones[i]==" "){
+
+    // Checking for available places in the phonebook.
+    for(int i=0;i<phoneBookSize;i++)
+    {
+        if(names[i]==" "&&phones[i]==" ")
+        {
             names[i]=name;
             phones[i]=phone;
+
             entryAddedSuccessfully=true;
             break;
-        }else{
+        }
+        else
+        {
             entryAddedSuccessfully=false;
             continue;    
         }
     }
-    if(entryAddedSuccessfully==true && isPhoneNumberValid==true){
+
+    if(entryAddedSuccessfully==true && isPhoneNumberValid==true)
+    {
         return true;
     }
     else
@@ -110,51 +142,62 @@ bool MyPhoneBook::addEntry(string name ,string phone){
     }
 }
 
-// displayEntryAtIndex
-bool MyPhoneBook::displayEntryAtIndex(int index){
-    if(index>(phoneBookSize-1) || index<0){
+// displayEntryAtIndex function
+bool MyPhoneBook::displayEntryAtIndex(int index)
+{
+    // Checking if the index entered is out of bounds.
+    if(index>(phoneBookSize-1) || index<0)
+    {
         return false;
     }
-    else{
-        cout<<"Name : "<<names[index]<<endl;
-        cout<<"Phone number : "<<phones[index]<<endl;
+    else
+    {
+        cout<<"Name: "<<names[index]<<endl;
+        cout<<"Phone number: "<<phones[index]<<endl;
         return true;
     }
 }
 
-// findBy
-
-// findByName
-int * MyPhoneBook::findByName(string name){
-    for(int i=0;i<phoneBookSize;i++){
-        if(names[i].rfind(name,0)!=string::npos){
+// findByName function
+int * MyPhoneBook::findByName(string name)
+{
+    for(int i=0;i<phoneBookSize;i++)
+    {
+        if(names[i].rfind(name,0)!=string::npos)
+        {
             findNameArray[i]=1;
-        }else{
+        }
+        else
+        {
             findNameArray[i]=0;
         }
     }
-    return findNameArray;
 
+    return findNameArray;
 }
 
-// findByPhone
-int * MyPhoneBook::findByPhone(string phone){ 
-    for(int i=0;i<phoneBookSize;i++){
-        if(phones[i].rfind(phone,0)!=string::npos){
+// findByPhone function
+int * MyPhoneBook::findByPhone(string phone)
+{ 
+    for(int i=0;i<phoneBookSize;i++)
+    {
+        if(phones[i].rfind(phone,0)!=string::npos)
+        {
             findPhoneArray[i]=1;
-        }else{
+        }
+        else
+        {
             findPhoneArray[i]=0;
         }
     }
-    return findPhoneArray;
 
+    return findPhoneArray;
 }
 
 // Function to display all entries.
 void MyPhoneBook::displayAll()
 
 {
-    
     for (int i = 0; i < phoneBookSize; i++)
     {
         // If conditon to skip blank entries
@@ -164,8 +207,8 @@ void MyPhoneBook::displayAll()
         }
         else 
         {
-            cout << setw(20) << left << names[i];
-            cout << setw(10) << phones[i];
+            cout << "Name " << (i+1)  << ": " << names[i];
+            cout << setw(10) << "Phone " << (i+1)  << ": " << phones[i];
             cout << endl;
         }
         
@@ -201,21 +244,29 @@ bool MyPhoneBook::updatePhoneAt(string phone, int index)
     string allowedPhoneNumberCharacters="0123456789";
     bool isPhoneNumberValid;
 
-    if(phone.length()==11){
-        for(int i=0;i<phone.length();i++){
-            if(allowedPhoneNumberCharacters.find(phone[i])!=string::npos){
+    if(phone.length()==11)
+    {
+        for(int i=0;i<phone.length();i++)
+        {
+            if(allowedPhoneNumberCharacters.find(phone[i])!=string::npos)
+            {
                 isPhoneNumberValid=true;
-            }else{
+            }
+            else
+            {
                 isPhoneNumberValid=false;
                 break;
             }
+        }
     }
-    }else{
+    else
+    {
         isPhoneNumberValid=false;
     }
 
     // This is one of the conditions that leads to entry insertion failure (Phone number being not valid)
-    if(isPhoneNumberValid==false){
+    if(isPhoneNumberValid==false)
+    {
         return false;
     }
 
@@ -229,18 +280,18 @@ bool MyPhoneBook::updatePhoneAt(string phone, int index)
         return false;
     }
     
-
 }
 
 //Update phone at indices.
 void MyPhoneBook::displayEntryAtIndices(int *indicesArray)
 {
     bool isArrayValid = true;
+
     for (int i = 0; i < phoneBookSize; i++)
     {
         if (indicesArray[i] != 1 && indicesArray[i] != 0)
         {
-            cout << "Array entered is not valid" << endl;
+            cout << "Array entered is not valid." << endl;
             isArrayValid = false;
             break;
         }
@@ -252,8 +303,8 @@ void MyPhoneBook::displayEntryAtIndices(int *indicesArray)
         {
             if (indicesArray[i] == 1)
             {
-                cout << setw(10) << names[i];
-                cout << setw(20) << phones[i];
+                cout << setw(20) << left << "Name " << (i+1)  << ": " << names[i];
+                cout << setw(10) << "Phone " << (i+1)  << ": " << phones[i];
                 cout << endl;
             }
         
@@ -262,34 +313,59 @@ void MyPhoneBook::displayEntryAtIndices(int *indicesArray)
     
     
 }
-
-int main()
-{
-    int sizeOfPhoneBook;
-    bool isProgramRunning = true;
-    cout << "Enter the size of your phonebook: ";
-    cin >> sizeOfPhoneBook;
-
-    MyPhoneBook userPhoneBook(sizeOfPhoneBook);
-
-    for(int i=0;i<sizeOfPhoneBook;i++)
-    {
-        string name;
-        string phone;
-        enterAgain:
-        cout<<"Enter name "<<to_string(i+1)<<": ";
-        cin>>name;
-        cout<<"Enter phone "<<to_string(i+1)<<": ";
-        cin>>phone;
-        bool entryAddedSuccessfully = userPhoneBook.addEntry(name,phone);
-        if(entryAddedSuccessfully==0){
-            goto enterAgain;
+//A function for validating user input in the main function
+bool validateUserInput(string &inputText,int &convertedText,string customAllowedCharacters,string customInvalidMessage){
+    for(int i=0;i<inputText.length();i++){
+        if(customAllowedCharacters.find(inputText[i])!=string::npos){
+            convertedText=stoi(inputText);
+            return true;
+        }
+        else{
+            cout<<customInvalidMessage<<endl;
+            return false;
         }
     }
+}
+int main()
+{
+    string inputSizeOfPhoneBook;
+    int sizeOfPhoneBook;
+    bool isProgramRunning = true;
+    
+    cout << "Enter the size of your phonebook: ";
+    cin >> inputSizeOfPhoneBook;
+    bool sizeValidationResult=validateUserInput(inputSizeOfPhoneBook ,sizeOfPhoneBook,"123456789","Invalid Input of Phone book Size!");
+    if(sizeValidationResult==false){
+        isProgramRunning=false;
+    }
+    cin.ignore(1000, '\n');
 
-    do
-    {
+    
+    if(sizeValidationResult==true){
+        MyPhoneBook userPhoneBook(sizeOfPhoneBook);
+        for(int i=0;i<sizeOfPhoneBook;i++)
+        {
+            string name;
+            string phone;
+
+            enterAgain:
+            cout<<"Enter name "<<to_string(i+1)<<": ";
+            getline(cin, name);
+
+            cout<<"Enter phone "<<to_string(i+1)<<": ";
+            getline(cin, phone);
+
+            bool entryAddedSuccessfully = userPhoneBook.addEntry(name,phone);
+
+            if(entryAddedSuccessfully==0)
+            {
+                goto enterAgain;
+            }
+        }
+    while (isProgramRunning){
+
         string userChoice;
+        
         string allowedUserChoiceCharacters="12345678";
         bool isUserChoiceValid;
 
@@ -304,12 +380,16 @@ int main()
         cout<<"6- Update phone by index"<<endl;
         cout<<"7- Copy phone book to another and display entries of the new phone book"<<endl;
         cout<<"8- Exit"<<endl;
+
         cout<<"Choice: ";
-
         cin>>userChoice;
-        int finalChoice;
+        cin.ignore(1000, '\n');
 
+        int finalChoice;
+        //Function for input validation (if it returns true then valid and it is converted)
+        
         // to check user's input.
+        /*
         if(userChoice.length()==1)
         {   
             if(allowedUserChoiceCharacters.find(userChoice[0])!=string::npos)
@@ -329,78 +409,134 @@ int main()
         {
             cout<<"Invalid Choice! Please choose from the menu!"<<endl;
             isUserChoiceValid=false;
+        } */
+        if(userChoice.length()==1){
+            isUserChoiceValid=validateUserInput(userChoice,finalChoice,allowedUserChoiceCharacters,"Invalid Choice! Please choose from the menu!");
+        }else{
+            cout<<"Invalid Choice! Please choose from the menu!"<<endl;
+            isUserChoiceValid=false;
         }
-        
-        
 
         if (isUserChoiceValid)  
         {
             switch (finalChoice)
             {
-                case 1:
+                case 1: // Display all entries
                     userPhoneBook.displayAll();
                     break;
 
-                case 2:
+                case 2: // Search by name
                 {
                     string nameToSearchFor;
-                    cout<<"Enter the name(Or part of it) you want to search for: "<<endl;
+
+                    cout<<"Enter the name(Or part of it) you want to search for: ";
                     cin >>nameToSearchFor;
+                    cin.ignore(1000, '\n');
+
                     int * nameSearchResultArray=userPhoneBook.findByName(nameToSearchFor);
-                    for(int i=0;i<sizeOfPhoneBook;i++){
-                        if(nameSearchResultArray[i]==1){
-                            cout<<"Entry at index "<<i<<" is a match"<<endl;
-                        }else{
+
+                    for(int i=0;i<sizeOfPhoneBook;i++)
+                    {
+                        if(nameSearchResultArray[i]==1)
+                        {
+                            cout<<"Entry at index "<<i<<" is a match :"<<endl;             
+                            userPhoneBook.displayEntryAtIndex(i);
+                            cout<<""<<endl;
+                        }
+                        else
+                        {
                             cout<<"Entry at index "<<i<<" is not a match"<<endl;
+                            cout<<""<<endl;
                         }
                     }
                     
-                    delete [] nameSearchResultArray;
                     nameSearchResultArray = NULL;
                     break;
                 }
-                case 3:
+                case 3: // Search by phone
                 {
                     string phoneToSearchFor;
-                    cout<<"Enter the phone number(Or part of it) you want to search for: "<<endl;
+
+                    cout<<"Enter the phone number(Or part of it) you want to search for: ";
                     cin >>phoneToSearchFor;
+                    cin.ignore(1000, '\n');
+
                     int * phoneSearchResultArray=userPhoneBook.findByPhone(phoneToSearchFor);
-                    for(int i=0;i<sizeOfPhoneBook;i++){
-                        if(phoneSearchResultArray[i]==1){
-                            cout<<"Entry at index "<<i<<" is a match"<<endl;
-                        }else{
+
+                    for(int i=0;i<sizeOfPhoneBook;i++)
+                    {
+                        if(phoneSearchResultArray[i]==1)
+                        {
+                            cout<<"Entry at index "<<i<<" is a match :"<<endl;             
+                            userPhoneBook.displayEntryAtIndex(i);
+                            cout<<""<<endl;
+                            
+                        }
+                        else
+                        {
                             cout<<"Entry at index "<<i<<" is not a match"<<endl;
+                            cout<<""<<endl;
                         }
                     }
-                    delete [] phoneSearchResultArray;
+
                     phoneSearchResultArray = NULL;
-                    
                     break;
                 }
-                case 4:
+                case 4: // Find entry by index / indices
                 {
                     string subMenuChoice;
-                    int indexOfEntry;
+                    string indexOfEntry;
+                    int validatedIndexOfEntry;
+
                     cout<<"Please choose from this menu the operation you want:"<<endl;
                     cout<<"A-Find just one entry by its index"<<endl;
                     cout<<"B-Find more than one entry by their indices"<<endl;
-                    cout<<"Your Choice:"<<endl;
-                    cin>>subMenuChoice;
-                    if(subMenuChoice=="A" ||subMenuChoice=="a"){
-                        cout<<"Enter the index of the entry:"<<endl;
+                    
+                    cout<<"Your Choice: ";
+                    cin >> subMenuChoice;
+                    cin.ignore(1000, '\n');
+                    
+
+                    if(subMenuChoice=="A" ||subMenuChoice=="a")
+                    {
+                        cout<<"Enter the index of the entry: ";
                         cin>>indexOfEntry;
-                        bool resultOfDisplayAtIndex=userPhoneBook.displayEntryAtIndex(indexOfEntry);
-                        if(resultOfDisplayAtIndex==0){
+                        if(!validateUserInput(indexOfEntry,validatedIndexOfEntry,"012345689","Invalid Input (Not an Integer)")){
+                            continue;
+                        }
+                        
+                        cin.ignore(1000, '\n');
+                        
+
+                        bool resultOfDisplayAtIndex=userPhoneBook.displayEntryAtIndex(validatedIndexOfEntry);
+
+                        if(resultOfDisplayAtIndex==0)
+                        {
                             cout<<"Index out of range!"<<endl;
                         }
                     }
-                    else if(subMenuChoice=="B"||subMenuChoice=="b"){
-    
+                    else if(subMenuChoice=="B"||subMenuChoice=="b")
+                    {
                         // By Indices
+                        int * arrayOfIndices = new int [sizeOfPhoneBook];
+
+                        for (int i = 0; i < sizeOfPhoneBook; i++)
+                        {
+                            cout << "Enter 0 or 1 for entry number " << (i+1) << ": ";
+                            cin >> arrayOfIndices[i];
+                            cin.ignore(1000, '\n');
+                        }
+                        
+                        cout << endl;
+                        userPhoneBook.displayEntryAtIndices(arrayOfIndices);
 
 
+                        delete [] arrayOfIndices;
+                        arrayOfIndices = NULL;
+                        
                     }
-                    else{
+                    else
+                    {
                         cout<<"Invalid choice!"<<endl;
                     }
                     break;
@@ -412,6 +548,7 @@ int main()
 
                     cout << "Enter index: ";
                     cin >> index;
+                    cin.ignore(1000, '\n');
 
                     if (index < 0 || index > sizeOfPhoneBook)
                     {
@@ -419,7 +556,8 @@ int main()
                     }
                     
                     cout << "Enter updated name: ";
-                    cin >> updatedName;
+                    getline(cin,updatedName);
+                    
 
                     bool isExecutedCorrectly = userPhoneBook.updateNameAt(updatedName,index);
                     
@@ -438,6 +576,7 @@ int main()
 
                     cout << "Enter index: ";
                     cin >> index;
+                    cin.ignore(1000, '\n');
 
                     if (index < 0 || index > sizeOfPhoneBook)
                     {
@@ -446,6 +585,7 @@ int main()
 
                     cout << "Enter updated phone number: ";
                     cin >> updatedPhone;
+                    cin.ignore(1000, '\n');
                     
                     bool isExecutedCorrectly = userPhoneBook.updatePhoneAt(updatedPhone,index);
                     
@@ -474,7 +614,10 @@ int main()
         
 
 
-    } while (isProgramRunning);
+    }
+    }
+
+     
     
     
     return 0;
