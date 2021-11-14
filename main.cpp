@@ -386,30 +386,6 @@ int main()
         cin.ignore(1000, '\n');
 
         int finalChoice;
-        //Function for input validation (if it returns true then valid and it is converted)
-        
-        // to check user's input.
-        /*
-        if(userChoice.length()==1)
-        {   
-            if(allowedUserChoiceCharacters.find(userChoice[0])!=string::npos)
-            {
-                isUserChoiceValid=true;
-                // Converting input of user to int.
-                finalChoice = stoi(userChoice);
-            }
-            else
-            {
-                cout<<"Invalid Choice! Please choose from the menu!"<<endl;
-                isUserChoiceValid=false;
-            }
-            
-        }
-        else
-        {
-            cout<<"Invalid Choice! Please choose from the menu!"<<endl;
-            isUserChoiceValid=false;
-        } */
         if(userChoice.length()==1){
             isUserChoiceValid=validateUserInput(userChoice,finalChoice,allowedUserChoiceCharacters,"Invalid Choice! Please choose from the menu!");
         }else{
