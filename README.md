@@ -7,7 +7,7 @@ OOP Assignment 1 SCS213 Course- FCAI CU
 - [x] names (private): Dynamic array of strings
 - [x] phones (private): Dynamic array of strings
 - [x] phoneBookSize (private): integer
-### Functions to be implemented:
+### Functions:
 #### Constructors:
 
 - [x] Parameterized One that takes the size of PhoneBook and allocate dynamic arrays of names and phones    MyPhoneBook(int)
@@ -34,7 +34,7 @@ OOP Assignment 1 SCS213 Course- FCAI CU
 
 ---
 
-- [ ] Member function (public): displayEntryAtIndices(int*)
+- [x] Member function (public): displayEntryAtIndices(int*)
 - Takes an array of zeroes and ones ( has the same size as class arrays (name and phone number))
 - The entry where there is a one (in its index position) in the array will be displayed
 
@@ -72,6 +72,8 @@ OOP Assignment 1 SCS213 Course- FCAI CU
 
 ---
 
-- [ ] Destructor
+- [x] Destructor
 - Deallocate the dynamic arrays and leave no memory leak
 
+To be done:
+- [ ] Separate the class from the main.cpp (Header file and another cpp)
