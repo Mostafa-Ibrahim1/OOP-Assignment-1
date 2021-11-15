@@ -2,7 +2,11 @@
 #include <string>
 #include <iomanip>
 using namespace std;
-
+/* 
+Group : SG1
+Team members:
+[Name: Mostafa Ibrahim Abdellatif, ID:20205006] [Name: Youssef Mohamed Emam, ID:20205031]
+*/
 // Class declaration.
 class MyPhoneBook
 {
